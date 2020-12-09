@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+   <record model="ir.ui.view" id="reserva.habitaciones_list">
+      <field name="name">Habitaciones</field>
+      <field name="model">reserva.habitaciones</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tipo"/>
+          <field name="numero"/>
+          <field name="cantidad_camas"/>
+          <field name="precio"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="reserva.habitaciones_action_window">
+      <field name="name">Habitaciones window</field>
+      <field name="res_model">reserva.habitaciones</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="reserva.habitaciones_action_server">
+      <field name="name">Habitaciones server</field>
+      <field name="model_id" ref="model_reserva_habitaciones"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+    <menuitem name="Reservas" id="reserva.menu_root"/>
+    <menuitem name="Reserva Habitacion" id="reserva.menu_reserva" parent="reserva.menu_root" action="reserva.habitaciones_action_window"/>    
+  </data>
+</odoo>
